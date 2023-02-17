@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
   printf("Checking the parentheses in argv arguments\n");
   for(i=1;i<argc;i++) {
      for(j=0;j<strlen(argv[i]);j++) {
-      switch(argv[i][j]) { //arrays of string 2 dimension
+      switch(argv[i][j]) { //arrays of string 2 dimension 
         case '[': push(&s,argv[i][j]);
         case '{': push(&s,argv[i][j]);
         case '(': push(&s,argv[i][j]); 
@@ -76,15 +76,17 @@ int main(int argc, char **argv) {
       }
        if(type == 1) break;
     }
-    if(type == 0) printf("argv %d: Correct !\n",i); 
+    if(type == 0) printf("argv %d: Correct\n",i); 
   }
   
   switch(type) {
-    case 1: printf("Argv %d Incorrect : mismatch",i); 
+    case 1: printf("argv %d incorrect: mismatch\n",i); 
     break;
-    case 2: printf("Argv %d Too many open parentheses",i);
+    case 2: printf("argv %d incorrect: too many open 
+   parentheses\n",i);
     break;
-    case 3: printf("Argv %d Too many closed parentheses",i); 
+    case 3: printf("argv %d incorrect: too many closed 
+   parentheses\n",i); 
     default: printf("Invalid !\n"); 
   }
    
