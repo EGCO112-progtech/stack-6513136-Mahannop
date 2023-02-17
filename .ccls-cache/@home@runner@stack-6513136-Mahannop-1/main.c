@@ -76,20 +76,24 @@ int main(int argc, char **argv) {
           type = 1; }
         break;
         case ')': if(pop(&s) != '(') {
-        type = 1; } 
+          type = 1; } 
         break;
         default: printf("Invalid !\n"); 
       }
        if(type == 1) break;
     }
-   if(type == 0) printf("argc %d: correct\n",i);
+    if(type == 0) printf("argv %d: Correct\n",i);
     else if(type == 1) printf("argv %d incorrect: mismatch\n",i); 
-    else if(s.size<0) { printf("argv %d incorrect: too many closed parentheses\n",i); 
+    else if(s.size<0) { 
+      printf("argv %d incorrect: too many closed 
+   parentheses\n",i); 
       pop_all(&s);
     }
-    else if(s.size>0) { printf("argv %d incorrect: too many open parentheses\n",i);
+    else if(s.size>0) { printf("argv %d incorrect: too many open 
+   parentheses\n",i);
       pop_all(&s);
     }
-  }
-   return 0;
+}
+   
+  return 0;
 }
