@@ -16,7 +16,7 @@ struct node
 typedef struct node Node;
 typedef struct node* NodePtr;
 //NodePtr is a pointer that was declared as typedef
-/* void push(NodePtr *top,int x);
+void push(NodePtr *top,int x);
 int pop(NodePtr *top);
 
 void push(NodePtr *top,int x) {
@@ -38,6 +38,6 @@ int pop(NodePtr *top) {
     }
     printf("Empty Stack\n");
     return 0; 
-} */
+}
 
 #endif
