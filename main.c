@@ -63,20 +63,26 @@ int main(int argc, char **argv) {
   for(i=1;i<argc;i++) {
      for(j=0;j<strlen(argv[i]);j++) {
       switch(argv[i][j]) { //arrays of string 2 dimension 
-        case '[': push(&s,argv[i][j]);
+        case '[': push(&s,argv[i][j]); 
+           
         break;
         case '{': push(&s,argv[i][j]);
+           
         break;
         case '(': push(&s,argv[i][j]); 
+          
         break;
         case ']': if(pop(&s) != '[') { 
-          type = 1; }
+          type = 1; 
+           }
         break;
         case '}': if(pop(&s) != '{') { 
-          type = 1; }
+          type = 1;
+          }
         break;
         case ')': if(pop(&s) != '(') {
-        type = 1; } 
+         type = 1;
+         } 
         break;
         default: printf("Invalid !\n"); 
       }
@@ -91,5 +97,6 @@ int main(int argc, char **argv) {
       pop_all(&s);
     }
   }
+  //{[]}[] {[]] [] {{ }} 
    return 0;
 }
