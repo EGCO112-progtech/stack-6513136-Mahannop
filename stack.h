@@ -35,7 +35,8 @@ int pop(StackPtr s) {
 
 void pop_all(StackPtr s) {
    while(s->size>0) { //t->top 
-     printf("Pop : %d\n",pop(s));
+    //printf("Pop : %d\n",pop(s));
+     pop(s); 
   }
 }
 

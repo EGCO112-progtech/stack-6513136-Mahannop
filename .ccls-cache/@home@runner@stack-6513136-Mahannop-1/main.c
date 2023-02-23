@@ -48,7 +48,7 @@ int main(int argc, char **argv){
 
 int main(int argc, char **argv) {
   Stack s;
-  int i,N,j,type;
+  int i,N,j;
   NodePtr top;
   s.top = NULL; //top pointing to NULL
   s.size = 0; 
@@ -60,40 +60,57 @@ int main(int argc, char **argv) {
   pop_all(&s); */
   
   printf("Checking the parentheses in argv arguments\n");
+  int type = 0,if_blank=0; 
   for(i=1;i<argc;i++) {
      for(j=0;j<strlen(argv[i]);j++) {
       switch(argv[i][j]) { //arrays of string 2 dimension 
-        case '[': push(&s,argv[i][j]);
+        case '[': push(&s,argv[i][j]); 
+           
         break;
         case '{': push(&s,argv[i][j]);
+           
         break;
         case '(': push(&s,argv[i][j]); 
+          
         break;
-        case ']': if(pop(&s) != '[') { 
-          type = 1; }
+        case ']': if(s.top == NULL) {
+             if_blank++;
+             type--; 
+        }
+        else if(pop(&s) != '[') { 
+             type = 1; 
+           }
         break;
-        case '}': if(pop(&s) != '{') { 
-          type = 1; }
+        case '}': if(s.top == NULL) {
+            if_blank++;
+            type--;
+        }
+          else if(pop(&s) != '{') { 
+          type = 1;
+          }
         break;
-        case ')': if(pop(&s) != '(') {
-          type = 1; } 
+        case ')': if(s.top == NULL) {
+            if_blank++;
+            type--;
+        }
+          else if(pop(&s) != '(') {
+          type = 1;
+         } 
         break;
         default: printf("Invalid !\n"); 
       }
        if(type == 1) break;
+    } 
+    if(s.size>0) { printf("argv %d incorrect: too many open parentheses\n",i);
+      pop_all(&s);
+      type--; 
     }
-    if(type == 0) printf("argv %d: Correct\n",i);
-    else if(type == 1) printf("argv %d incorrect: mismatch\n",i); 
-    else if(s.size<0) { 
-      printf("argv %d incorrect: too many closed 
-   parentheses\n",i); 
+    else if(type == 0) printf("argc %d: correct\n",i);
+    else if(type == 1) printf("argv %d incorrect: mismatch\n",i);
+    else if(if_blank>1) { printf("argv %d incorrect: too many closed parentheses\n",i); 
       pop_all(&s);
     }
-    else if(s.size>0) { printf("argv %d incorrect: too many open 
-   parentheses\n",i);
-      pop_all(&s);
-    }
-}
-   
-  return 0;
+  }
+  //{[]}[] {[]] [] {{ }} 
+   return 0;
 }
