@@ -70,9 +70,6 @@ int main(int argc, char **argv) {
         case '{': push(&s,argv[i][j]);
            
         break;
-        case '(': push(&s,argv[i][j]); 
-          
-        break;
         case ']': if(s.top == NULL) {
              if_blank++;
              type--; 
@@ -85,17 +82,9 @@ int main(int argc, char **argv) {
             if_blank++;
             type--;
         }
-          else if(pop(&s) != '{') { 
-          type = 1;
+        else if(pop(&s) != '{') { 
+             type = 1;
           }
-        break;
-        case ')': if(s.top == NULL) {
-            if_blank++;
-            type--;
-        }
-          else if(pop(&s) != '(') {
-          type = 1;
-         } 
         break;
         default: printf("Invalid !\n"); 
       }
@@ -108,7 +97,6 @@ int main(int argc, char **argv) {
     else if(type == 0) printf("argc %d: correct\n",i);
     else if(type == 1) printf("argv %d incorrect: mismatch\n",i);
     else if(if_blank>1) { printf("argv %d incorrect: too many closed parentheses\n",i); 
-      pop_all(&s);
     }
   }
   //{[]}[] {[]] [] {{ }} 
