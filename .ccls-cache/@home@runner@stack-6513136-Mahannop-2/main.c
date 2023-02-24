@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
     }
     else if(type == 0) printf("argc %d: correct\n",i);
     else if(type == 1) printf("argv %d incorrect: mismatch\n",i);
-    else if(if_blank>1) printf("argv %d incorrect: too many closed parentheses\n",i); 
+    else if(if_blank>0) printf("argv %d incorrect: too many closed parentheses\n",i); 
     
   }
   //{[]}[] {[]] [] {{ }} 
