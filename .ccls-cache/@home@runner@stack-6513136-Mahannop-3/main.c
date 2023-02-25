@@ -61,45 +61,40 @@ int main(int argc, char **argv) {
   
   printf("Checking the parentheses in argv arguments\n");
   int type = 0,isempty=0; 
-  
   for(i=1;i<argc;i++) {
      for(j=0;j<strlen(argv[i]);j++) {
-      
-       switch(argv[i][j]) { //arrays of string 2 dimension 
-        
+      switch(argv[i][j]) { //arrays of string 2 dimension 
         case '[': push(&s,argv[i][j]); 
            type = 0;
         break;
-        
         case '{': push(&s,argv[i][j]);
            type = 0;
         break;
-        
         case ']': if(s.top == NULL)  {
              isempty++;
              type--; 
         }
+        
         else if(pop(&s) != '[') { 
              type = 1;  
-             if(pop(&s) == ']') type = 1; 
+             if(pop(&s) != ']') type = 1; 
            }
         break;
-        
         case '}': if(s.top == NULL) {
             isempty++;
             type--;
         }
         else if(pop(&s) != '{') { 
              type = 1;
-            if(pop(&s) == '}') type = 1;
+            if(pop(&s) != '}') type = 1;
           }
         break;
-        default: type = 1;
+        default: printf("Invalid !\n"); 
       }
-       if(type == 1 && s.size==0) break;
+       if(type == 1) break;
     } 
-    if(s.size>0) { printf("argv %d incorrect: too many open parentheses\n",i);
-        pop_all(&s);
+    if(s.size>0 && s.top!=NULL) { printf("argv %d incorrect: too many open parentheses\n",i);
+       pop_all(&s);
     }
     else if(type == 0)  printf("argc %d: correct\n",i); 
     else if(type == 1 || s.top!=NULL && s.size==1) { printf("argv %d incorrect: mismatch\n",i);  
@@ -109,6 +104,6 @@ int main(int argc, char **argv) {
     
   }
   //{[]}[] {[]] [] {{ }} 
-  //{]] {] [} }{ ][ [[}} [[]] {{}} {][} [}{] }}{{ ]][[
+  //{]] {] [} }{ ][ [[}} [[]] {{}}
    return 0;
 }
